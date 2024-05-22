@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nodejs_blogs",
+  "info": {
+    "singularName": "nodejs-blog",
+    "pluralName": "nodejs-blogs",
+    "displayName": "Nodejs-Blogs",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "author": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
