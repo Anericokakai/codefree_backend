@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "topics",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "categories",
+    "singularName": "topic",
+    "pluralName": "topics",
+    "displayName": "topics",
     "description": ""
   },
   "options": {
@@ -12,20 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "category_name": {
+    "topic": {
+      "type": "string"
+    },
+    "slug": {
       "type": "string"
     },
     "nodejs_blogs": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::nodejs-blog.nodejs-blog",
-      "inversedBy": "categories"
+      "mappedBy": "topic"
     },
     "spring_boots": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::spring-boot.spring-boot",
-      "mappedBy": "categories"
+      "mappedBy": "topic"
     }
   }
 }

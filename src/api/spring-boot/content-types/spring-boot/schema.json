@@ -1,36 +1,30 @@
 {
   "kind": "collectionType",
-  "collectionName": "nodejs_blogs",
+  "collectionName": "spring_boots",
   "info": {
-    "singularName": "nodejs-blog",
-    "pluralName": "nodejs-blogs",
-    "displayName": "Nodejs-Blogs",
+    "singularName": "spring-boot",
+    "pluralName": "spring-boots",
+    "displayName": "Spring boot",
     "description": ""
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
     "Title": {
       "type": "string"
     },
-    "Content": {
-      "type": "blocks"
-    },
     "image": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos",
+        "audios"
       ]
-    },
-    "author": {
-      "type": "string"
-    },
-    "slug": {
-      "type": "string"
     },
     "description": {
       "type": "text"
@@ -39,13 +33,22 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::category.category",
-      "mappedBy": "nodejs_blogs"
+      "inversedBy": "spring_boots"
     },
     "topic": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::topic.topic",
-      "inversedBy": "nodejs_blogs"
+      "inversedBy": "spring_boots"
+    },
+    "Content": {
+      "type": "blocks"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
     }
   }
 }

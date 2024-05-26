@@ -800,12 +800,17 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    category: Attribute.Relation<
+    category_name: Attribute.String;
+    nodejs_blogs: Attribute.Relation<
       'api::category.category',
       'manyToMany',
       'api::nodejs-blog.nodejs-blog'
     >;
-    category_name: Attribute.String;
+    spring_boots: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::spring-boot.spring-boot'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -847,6 +852,11 @@ export interface ApiNodejsBlogNodejsBlog extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    topic: Attribute.Relation<
+      'api::nodejs-blog.nodejs-blog',
+      'manyToOne',
+      'api::topic.topic'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -857,6 +867,52 @@ export interface ApiNodejsBlogNodejsBlog extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::nodejs-blog.nodejs-blog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSpringBootSpringBoot extends Schema.CollectionType {
+  collectionName: 'spring_boots';
+  info: {
+    singularName: 'spring-boot';
+    pluralName: 'spring-boots';
+    displayName: 'Spring boot';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String;
+    image: Attribute.Media;
+    description: Attribute.Text;
+    categories: Attribute.Relation<
+      'api::spring-boot.spring-boot',
+      'manyToMany',
+      'api::category.category'
+    >;
+    topic: Attribute.Relation<
+      'api::spring-boot.spring-boot',
+      'manyToOne',
+      'api::topic.topic'
+    >;
+    Content: Attribute.Blocks;
+    slug: Attribute.String;
+    author: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::spring-boot.spring-boot',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::spring-boot.spring-boot',
       'oneToOne',
       'admin::user'
     > &
@@ -886,6 +942,48 @@ export interface ApiTagTag extends Schema.SingleType {
   };
 }
 
+export interface ApiTopicTopic extends Schema.CollectionType {
+  collectionName: 'topics';
+  info: {
+    singularName: 'topic';
+    pluralName: 'topics';
+    displayName: 'topics';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    topic: Attribute.String;
+    slug: Attribute.String;
+    nodejs_blogs: Attribute.Relation<
+      'api::topic.topic',
+      'oneToMany',
+      'api::nodejs-blog.nodejs-blog'
+    >;
+    spring_boots: Attribute.Relation<
+      'api::topic.topic',
+      'oneToMany',
+      'api::spring-boot.spring-boot'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::topic.topic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::topic.topic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -906,7 +1004,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
       'api::nodejs-blog.nodejs-blog': ApiNodejsBlogNodejsBlog;
+      'api::spring-boot.spring-boot': ApiSpringBootSpringBoot;
       'api::tag.tag': ApiTagTag;
+      'api::topic.topic': ApiTopicTopic;
     }
   }
 }
