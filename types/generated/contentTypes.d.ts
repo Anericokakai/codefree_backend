@@ -829,6 +829,32 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiLikeLike extends Schema.CollectionType {
+  collectionName: 'likes';
+  info: {
+    singularName: 'like';
+    pluralName: 'likes';
+    displayName: 'likes';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_user: Attribute.Relation<
+      'api::like.like',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::like.like', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::like.like', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNodejsBlogNodejsBlog extends Schema.CollectionType {
   collectionName: 'nodejs_blogs';
   info: {
@@ -902,6 +928,8 @@ export interface ApiSpringBootSpringBoot extends Schema.CollectionType {
     Content: Attribute.Blocks;
     slug: Attribute.String;
     author: Attribute.String;
+    previous: Attribute.String;
+    Next: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1003,6 +1031,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
+      'api::like.like': ApiLikeLike;
       'api::nodejs-blog.nodejs-blog': ApiNodejsBlogNodejsBlog;
       'api::spring-boot.spring-boot': ApiSpringBootSpringBoot;
       'api::tag.tag': ApiTagTag;

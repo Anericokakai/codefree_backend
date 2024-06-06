@@ -49,6 +49,12 @@
     },
     "author": {
       "type": "string"
+    },
+    "previous": {
+      "type": "string"
+    },
+    "Next": {
+      "type": "string"
     }
   }
 }
