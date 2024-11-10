@@ -17,9 +17,6 @@ jobs:
           with:
             node-version: "20.x"
 
-        - name : Install dependecnies
-          run: npm install
-
         - name: create .env file
           run: |
             echo "APP_KEYS=${{ secrets.APP_KEYS }}" > .env
@@ -33,10 +30,14 @@ jobs:
             echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> .env
             echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
             echo "DATABASE_SSL=${{ secrets.DATABASE_SSL }}" >> .env
-            exho "DATABASE_CLIENT=${{ secrets.DATABASE_CLIENT }}" >> .env
+            echo "DATABASE_CLIENT=${{ secrets.DATABASE_CLIENT }}" >> .env
             echo "CLOUDINARY_NAME=${{ secrets.CLOUDINARY_NAME }}" >> .env   
             echo "CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}" >> .env
             echo "CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}" >> .env
+
+        
+        - name : Install dependecnies
+          run: npm install
 
         - name: build Strapi
           run: npm run build
