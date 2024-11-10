@@ -41,7 +41,7 @@ jobs:
           run: npm install
 
         - name: build Strapi
-          run: npm run build
+          run: npm run build -- --debug
 
         - name: Start The Server With PM2
           run: |
